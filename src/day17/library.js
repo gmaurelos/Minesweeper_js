@@ -46,10 +46,82 @@ class Media {
 	get ratings(){
 		return this._ratings;
 	}
-	set isCheckedOut(bool) {
-		this._isCheckedOut = bool;
+	set isCheckedOut(bl) {
+		this._isCheckedOut = bl;
+	}
+	toggleCheckOutStatus() {
+		this._isCheckedOut = !this._isCheckedOut;
+	}
+
+	reducer(acc,curr) {
+		return acc+curr;
 	}
 	getAverageRating(){
-
+		const sum = this._ratings.reduce(this.reducer)
+		return sum/ this._ratings.length;
+	}
+	addRating (rat) {
+		this._ratings.push(rat);
 	}
 }
+
+class Book extends Media {
+	constructor (title,author,pages){
+		super(title);
+		this._author = author;
+		this._pages = pages;
+	}
+
+	get author() {
+		return this._author;
+	}
+	get pages() {
+		return this._pages;
+	}
+}
+
+// * Properties: director (string), title (string), runTime (number), isCheckedOut (boolean, 
+// * initially false), and ratings (array, initially empty)
+
+class Movie extends Media {
+	constructor (title,director,runTime){
+		super(title);
+		this._director = director;
+		this._runTime = runTime;
+	}
+
+	get director() {
+		return this._director;
+	}
+	get runTime() {
+		return this._runTime;
+	}
+}
+
+// * CD
+// * Properties: artist (string), title (string), isCheckedOut (boolean, initially false),
+// * and ratings (array, initially empty), songs (array of strings)
+
+class CD extends Media {
+	constructor (title,artist,songs){
+		super(title);
+		this._songs = songs;
+		this._artist = artist;
+	}
+
+	get songs() {
+		return this._songs;
+	}
+	get artist() {
+		return this.artist;
+	}
+}
+
+const historyOfEverything = new Book('A Short History of Nearly Everything','Bill Bryson',544);
+historyOfEverything.toggleCheckOutStatus();
+
+console.log('Book '+historyOfEverything.title+' has _isCheckedOut = '+ historyOfEverything.isCheckedOut );
+historyOfEverything.addRating(4);
+historyOfEverything.addRating(5);
+historyOfEverything.addRating(5);
+console.log('Book '+historyOfEverything.title+' has avg rating = '+ historyOfEverything.getAverageRating());
