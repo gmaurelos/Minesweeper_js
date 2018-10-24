@@ -1,5 +1,4 @@
 /********************************	Build a Library		*************************************
- *  
  * Congratulations, you've passed the grueling rigmarole of librarian school and have become 
  * head librarian at your local Books-'N-Stuff.
  *
@@ -47,7 +46,7 @@ class Media {
 	get ratings(){
 		return this._ratings;
 	}
-	set isCheckedOut(bl) {
+  set isCheckedOut(bl) {
 		this._isCheckedOut = bl;
 	}
 	toggleCheckOutStatus() {
@@ -126,3 +125,4 @@ historyOfEverything.addRating(4);
 historyOfEverything.addRating(5);
 historyOfEverything.addRating(5);
 console.log('Book '+historyOfEverything.title+' has avg rating = '+ historyOfEverything.getAverageRating());
+
